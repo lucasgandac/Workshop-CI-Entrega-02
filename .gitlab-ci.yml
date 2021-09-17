@@ -1,0 +1,23 @@
+stages:
+  - build
+  - test
+
+build-frontend:
+  stage: build
+  script:
+    - echo "Check the frontend build."
+
+build-backend:
+  stage: build
+  script:
+    - echo "Check the backend build."
+
+test-front:
+  stage: test
+  script:
+    - echo "Check the frontend tests"
+
+test-back:
+  stage: test
+  script:
+    - echo "Check the backend tests"
