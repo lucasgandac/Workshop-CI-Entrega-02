@@ -1,3 +1,16 @@
+image: docker:stable
+
+variables:
+  DOCKER_DRIVER: overlay2
+   DOCKER_USER:  $DOCKER_USER
+  DOCKER_PASSWORD:  $DOCKER_PASSWORD
+
+services:
+- docker:dind
+
+before_script:
+- docker info
+
 stages:
   - build
   - test
@@ -13,11 +26,19 @@ build-backend:
     - echo "Check the backend build."
 
 test-front:
+  image: docker/compose:latest
   stage: test
   script:
     - echo "Check the frontend tests"
-
+    - docker-compose run --entrypoint "npm run coverage" frontend
+  after_script:
+    - echo "Success!!"
+    
 test-back:
+  image: docker/compose:latest
   stage: test
   script:
     - echo "Check the backend tests"
+    - docker-compose run --entrypoint "npm run unittest" backend
+  after_script:
+    - echo "Success!!"
