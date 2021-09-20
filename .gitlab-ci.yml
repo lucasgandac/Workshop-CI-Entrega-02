@@ -21,11 +21,11 @@ build-frontend:
     - echo "Check the frontend build."
     - docker build -t frontend -f ./frontend/Dockerfile ./frontend/ 
 
-
 build-backend:
   stage: build
   script:
     - echo "Check the backend build."
+    - docker build -t backend -f ./backend/Dockerfile ./backend/
 
 test-front:
   image: docker/compose:latest
