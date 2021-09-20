@@ -54,11 +54,13 @@ deploy:
   stage: deploy  
   before_script:
     - echo "Log in DockerHub"
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+
+
   script:
     - echo "Deploying on hub..."
-    - docker build -t $DOCKER_USER/workshopcientrega02:backend -f ./backend/Dockerfile ./backend/ 
-    - docker build -t $DOCKER_USER/workshopcientrega02:frontend -f ./backend/Dockerfile ./frontend/ 
-    - docker push DOCKER_USER/workshopcientrega02:frontend
-    - docker push DOCKER_USER/workshopcientrega02:backend
+    - docker build -t $DOCKER_USER/workshop-ci-entrega_02:backend -f ./backend/Dockerfile ./backend/ 
+    - docker build -t $DOCKER_USER/workshop-ci-entrega_02:frontend -f ./backend/Dockerfile ./frontend/ 
+    - docker push DOCKER_USER/workshop-ci-entrega_02:frontend
+    - docker push DOCKER_USER/workshop-ci-entrega_02:backend
     - echo "Sucess deploying to hub"
