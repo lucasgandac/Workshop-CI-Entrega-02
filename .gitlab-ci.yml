@@ -19,6 +19,8 @@ build-frontend:
   stage: build
   script:
     - echo "Check the frontend build."
+    - docker build -t frontend -f ./frontend/Dockerfile ./frontend/ 
+
 
 build-backend:
   stage: build
