@@ -18,29 +18,33 @@ stages:
 build-frontend:
   stage: build
   script:
-    - echo "Check the frontend build."
+    - echo "Checking the frontend build"
     - docker build -t frontend -f ./frontend/Dockerfile ./frontend/ 
+  after_script:
+    - echo "Success building"
 
 build-backend:
   stage: build
   script:
-    - echo "Check the backend build."
+    - echo "Checking the backend build"
     - docker build -t backend -f ./backend/Dockerfile ./backend/
+  after_script:
+    - echo "Success building"
 
 test-front:
   image: docker/compose:latest
   stage: test
   script:
-    - echo "Check the frontend tests"
+    - echo "Checking the frontend tests"
     - docker-compose run --entrypoint "npm run coverage" frontend
   after_script:
-    - echo "Success!!"
+    - echo "Success testing"
     
 test-back:
   image: docker/compose:latest
   stage: test
   script:
-    - echo "Check the backend tests"
+    - echo "Checking the backend tests"
     - docker-compose run --entrypoint "npm run unittest" backend
   after_script:
-    - echo "Success!!"
+    - echo "Success testing"
