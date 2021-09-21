@@ -59,7 +59,7 @@ deploy-app:
 
   script:
     - echo "Deploying on hub..."
-    - docker build -f ./backend/Dockerfile -t $DOCKER_USER/workshop-ci-entrega_02_backend:backend ./backend
+    - docker build -f ./backend/Dockerfile -t $DOCKER_USER/workshop-ci-entrega-02_backend:backend ./backend
     - docker build -f ./frontend/Dockerfile -t $DOCKER_USER/workshop-ci-entrega-02_frontend:frontend ./frontend
     - docker push $DOCKER_USER/workshop-ci-entrega-02_frontend:frontend
     - docker push $DOCKER_USER/workshop-ci-entrega-02_backend:backend
