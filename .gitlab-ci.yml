@@ -50,11 +50,11 @@ test-back:
   after_script:
     - echo "Success testing"
 
-deploy:
+deploy-app:
   stage: deploy  
   before_script:
     - echo "Log in DockerHub"
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
 
 
   script:
